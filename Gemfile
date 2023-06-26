@@ -52,4 +52,3 @@ end
 gem 'rswag'
 gem 'rspec-rails'
 gem "rest-client"
-gem 'bundler', '2.4.10'
