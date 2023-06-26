@@ -1,0 +1,130 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/all-properties":
+    get:
+      summary: list properties
+      responses:
+        '200':
+          description: successful
+  "/api/v1/each-properties/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: show property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/create-properties":
+    post:
+      summary: create property
+      parameters: [ ]
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                property_address:
+                  type: string
+                property_type:
+                  type: string
+                number_of_bedrooms:
+                  type: integer
+                number_of_sitting_rooms:
+                  type: integer
+                number_of_kitchens:
+                  type: integer
+                number_of_bathrooms:
+                  type: integer
+                number_of_toilets:
+                  type: integer
+                property_owner:
+                  type: string
+                valid_from:
+                  type: string
+                valid_to:
+                  type: string
+                description:
+                  type: string
+              required:
+                - address
+                - property_type
+                - num_of_bedrooms
+                - num_of_sitting_rooms
+                - num_of_kitchens
+                - num_of_bathrooms
+                - num_of_toilets
+                - owner
+                - description
+                - valid_from
+                - valid_to
+
+  "/api/v1/update-properties/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    put:
+      summary: update property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/retrieve-property_owner/{property_owner}":
+    parameters:
+      - name: property_owner
+        in: path
+        description: property_owner
+        required: true
+        schema:
+          type: string
+    get:
+      summary: retrievePropertyByOwner property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/retrieve-property_address/{property_address}":
+    parameters:
+      - name: property_address
+        in: path
+        description: property_address
+        required: true
+        schema:
+          type: string
+    get:
+      summary: retrievePropertyByAddress property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/retrieve-multiple-property/{search}":
+    parameters:
+      - name: search
+        in: path
+        description: search
+        required: true
+        schema:
+          type: string
+    get:
+      summary: retrieveMultipleProperties property
+      responses:
+        '200':
+          description: successful
+servers:
+  - url: http://{defaultHost}
+    variables:
+      defaultHost:
+        default: localhost:3000
