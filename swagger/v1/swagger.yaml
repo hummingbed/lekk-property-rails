@@ -80,10 +80,36 @@ paths:
       schema:
         type: string
     put:
-      summary: update property
+      summary: update property completely
+      parameters: [ ]
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                number_of_bedrooms:
+                  type: integer
+                number_of_sitting_rooms:
+                  type: integer
+                number_of_kitchens:
+                  type: integer
+                number_of_bathrooms:
+                  type: integer
+                number_of_toilets:
+                  type: integer
+              required:
+                - description
+                - num_of_bedrooms
+                - num_of_sitting_rooms
+                - num_of_kitchens
+                - num_of_bathrooms
+                - num_of_toilets
   "/api/v1/retrieve-property_owner/{property_owner}":
     parameters:
     - name: property_owner
