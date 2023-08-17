@@ -3,15 +3,15 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace 'api' do
     namespace 'v1' do
-    get '/all-properties', to: 'properties#index'
-    get '/each-properties/:id', to: 'properties#show'
-    post '/create-properties', to: 'properties#save'
-    put '/update-properties/:id', to: 'properties#update'
-    get '/retrieve-property_owner/:property_owner', to: 'properties#retrievePropertyByOwner'
-    get '/retrieve-property_address/:property_address', to: 'properties#retrievePropertyByAddress'
-    get '/retrieve-multiple-property/:search', to: 'properties#retrieveMultipleProperties'
-#         resources :properties
-#         resources :articles
+      namespace 'properties' do
+        get '/', to: 'properties#allProperty' 
+        get '/:id/each-properties', to: 'properties#getPropertyById'
+        get '/:owner/search-owner', to: 'properties#retrievePropertyByOwner'
+        get '/:search/search-multiple', to: 'properties#searchMultipleProperties'
+        get '/:address/property-address', to: 'properties#searchPropertyByAddress'
+        post '/create-properties', to: 'properties#addNewProperty'
+        put ':id/update-properties', to: 'properties#editPropertyById'
+      end
     end
   end
 end

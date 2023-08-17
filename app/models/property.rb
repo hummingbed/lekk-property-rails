@@ -12,11 +12,24 @@ class Property < ApplicationRecord
       validates :valid_from, presence: true
       validates :valid_to, presence: true
 
-    def self.find_properties_with_toilet(toilet_value)
-        where(property_owner: toilet_value)
+    def self.findPropertiesWithToilet(propertyOwner)
+        where(property_owner: propertyOwner)
     end
 
-    def self.find_properties_with_address(address_value)
-        where(property_address: address_value)
+    def self.multiplePropertySearch(properties)
+        where("property_address LIKE :search OR
+            property_type LIKE :search OR
+            CAST(number_of_bedrooms AS TEXT) LIKE :search OR
+            CAST(number_of_sitting_rooms AS TEXT) LIKE :search OR
+            CAST(number_of_kitchens AS TEXT) LIKE :search OR
+            CAST(number_of_bathrooms AS TEXT) LIKE :search OR
+            CAST(number_of_toilets AS TEXT) LIKE :search OR
+            property_owner LIKE :search OR
+            description LIKE :search",
+        search: properties)
+    end
+
+    def self.findPropertiesWithAddress(addressValue)
+        where(property_address: addressValue)
     end
 end

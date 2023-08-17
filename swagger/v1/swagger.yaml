@@ -4,13 +4,13 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/all-properties":
+  "/api/v1/properties":
     get:
       summary: list properties
       responses:
         '200':
           description: successful
-  "/api/v1/each-properties/{id}":
+  "/api/v1/properties/{id}/each-properties/":
     parameters:
     - name: id
       in: path
@@ -23,7 +23,7 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/create-properties":
+  "/api/v1/properties/create-properties":
     post:
       summary: create property
       parameters: [ ]
@@ -71,7 +71,7 @@ paths:
                 - valid_from
                 - valid_to
 
-  "/api/v1/update-properties/{id}":
+  "/api/v1/properties/{id}/update-properties":
     parameters:
     - name: id
       in: path
@@ -110,7 +110,7 @@ paths:
                 - num_of_kitchens
                 - num_of_bathrooms
                 - num_of_toilets
-  "/api/v1/retrieve-property_owner/{property_owner}":
+  "/api/v1/properties/{property_owner}/search-owner":
     parameters:
     - name: property_owner
       in: path
@@ -123,7 +123,7 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/retrieve-property_address/{property_address}":
+  "/api/v1/properties/{property_address}/property-address":
     parameters:
     - name: property_address
       in: path
@@ -136,7 +136,7 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/retrieve-multiple-property/{search}":
+  "/api/v1/properties/{search}/search-multiple":
     parameters:
     - name: search
       in: path
