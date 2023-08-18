@@ -5,19 +5,22 @@ FROM ruby:3.1.3
 WORKDIR /app
 
 # Install dependencies
-RUN apt-get update  && apt-get install -y build-essential nodejs
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    nodejs
 
-# Copy the Gemfile and Gemfile.lock into the container
-COPY Gemfile Gemfile.lock ./
-
-# Install the bundler gem
+# Install bundler
 RUN gem install bundler
 
-# Install the project dependencies
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+
+# Install gems
 RUN bundle install
 
-# Copy the application code into the container
+# Copy the rest of the application code
 COPY . .
 
-
-# Expose the port on which the app
+# Start the Rails server
+CMD ["rails", "server", "-b", "0.0.0.0"]
