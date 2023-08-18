@@ -103,6 +103,8 @@ paths:
                   type: integer
                 number_of_toilets:
                   type: integer
+                valid_to:
+                  type: string
               required:
                 - description
                 - num_of_bedrooms

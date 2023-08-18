@@ -55,7 +55,7 @@ module Api
 
 #          save or create a new property api
 
-            def addNewProperty
+            def addNewProperty                
                 saveProperty = Property.new(property_data)
                 
                 if property_data.empty?
@@ -87,11 +87,18 @@ module Api
 
             def editPropertyById
 
-                updatePropertyById = Property.find(params[:id])
-                if updatePropertyById.update(property_params)
-                    render json: {status: 'success', message: 'updated Property', data:updatePropertyById}, status: :ok
+                property = Property.find(params[:id])
+
+                if property
+                property.update(
+                    description: params[:description],  number_of_bedrooms: params[:number_of_bedrooms],
+                    number_of_sitting_rooms: params[:number_of_sitting_rooms], number_of_kitchens: params[:number_of_kitchens],
+                    number_of_bathrooms: params[:number_of_bathrooms], number_of_toilets: params[:number_of_toilets],
+                    valid_to: params[:valid_to],
+                )
+                    render json: {status: 'success', message: 'updated Property', data:property}, status: :ok
                 else
-                     render json: {status: 'failed', message: 'not saved', data:updatePropertyById.errors}, status: :unprocessable_entity
+                    render json: {status: 'failed', message: 'not saved', data:property.errors}, status: :unprocessable_entity
                 end
             end
 
@@ -99,18 +106,13 @@ module Api
             private
 
             def property_data
-                params.permit(:property_address, :property_type, :number_of_bedrooms,
-                :number_of_sitting_rooms, :number_of_kitchens, :number_of_bathrooms,
-                :number_of_toilets, :property_owner,:description, :valid_from, :valid_to)
+                params.require(:property).permit(:property_address, :property_type, :number_of_bedrooms, :number_of_sitting_rooms,
+                    :number_of_kitchens, :number_of_bathrooms, :number_of_toilets, :property_owner, :description, :valid_from, :valid_to
+                )
             end
 
             def property_not_found
               render json: {status: 'failed', message: 'not found: invalid Property id' }, status: 404
-            end
-
-            def property_params
-                params.permit(:number_of_sitting_rooms, :number_of_kitchens, :number_of_bathrooms,
-                :number_of_toilets,  :description, :number_of_bedrooms)
             end
 
         end
