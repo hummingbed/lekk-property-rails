@@ -1,17 +1,5 @@
 class Property < ApplicationRecord
 
-    #   validates :property_address, presence: true
-    #   validates :property_type, presence: true
-    #   validates :number_of_bedrooms, presence: true
-    #   validates :number_of_sitting_rooms, presence: true
-    #   validates :number_of_kitchens, presence: true
-    #   validates :number_of_bathrooms, presence: true
-    #   validates :number_of_toilets, presence: true
-    #   validates :property_owner, presence: true
-    #   validates :description, presence: true
-    #   validates :valid_from, presence: true
-    #   validates :valid_to, presence: true
-
     validates :property_address, :property_type, :number_of_bedrooms, :number_of_sitting_rooms,
     :number_of_kitchens, :number_of_bathrooms, :number_of_toilets, :property_owner, :description,
     :valid_from, :valid_to, presence: true
